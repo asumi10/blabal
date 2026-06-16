@@ -113,6 +113,22 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     uc.CornerRadius = UDim.new(0, 18)
     uc.Parent = main
 
+    -- YENİ ARKA PLAN (BACKGROUND IMAGE) EKLEME ALANI
+    -- Referans Alınan Dosya: "—Pngtree—japanese temple logo in black_21380328.png"
+    local mainbg = Instance.new("ImageLabel")
+    mainbg.Name = "mainbg"
+    mainbg.Parent = main
+    mainbg.AnchorPoint = Vector2.new(0.5, 0.5)
+    mainbg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    mainbg.BackgroundTransparency = 1
+    mainbg.Position = UDim2.new(0.5, 0, 0.5, 0)
+    mainbg.Size = UDim2.new(0.95, 0, 0.95, 0) -- Hafif kenar boşluğu ile şık durması için
+    mainbg.ZIndex = 0 -- Elementlerin arkasında kalması için en düşük katman
+    mainbg.Image = "rbxassetid://130206672959803" -- Resmini Roblox'a yükleyip buradaki ID ile değiştirebilirsin
+    mainbg.ImageColor3 = Color3.fromRGB(0, 0, 0) -- Dark temaya tam uyum sağlaması için görsel siyah yapıldı
+    mainbg.ImageTransparency = 0.92 -- Gözü yormaması ve butonların okunması için opaklık çok hafif yapıldı
+    mainbg.ScaleType = Enum.ScaleType.Fit
+
     local UserInputService = game:GetService("UserInputService")
     local dragging
     local dragInput
@@ -156,8 +172,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     workarea.Name = "workarea"
     workarea.Parent = main
     workarea.BackgroundColor3 = Color3.fromRGB(25, 27, 31)
+    workarea.BackgroundTransparency = 0.1 -- Arka plan görselinin sağ panelden de hafif sızması için şeffaflık verildi
     workarea.Position = UDim2.new(0.36403501, 0, 0, 0)
     workarea.Size = UDim2.new(0, 458, 0, 584)
+    workarea.ZIndex = 1
 
     local uc_2 = Instance.new("UICorner")
     uc_2.CornerRadius = UDim.new(0, 18)
@@ -166,9 +184,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     local workareacornerhider = Instance.new("Frame")
     workareacornerhider.Name = "workareacornerhider"
     workareacornerhider.Parent = workarea
-    workareacornerhider.BackgroundColor3 = Color3.fromRGB(25, 27, 31) -- FIXED: Uyumsuz renk koyulaştırıldı
+    workareacornerhider.BackgroundColor3 = Color3.fromRGB(25, 27, 31)
     workareacornerhider.BorderSizePixel = 0
     workareacornerhider.Size = UDim2.new(0, 18, 0.99895674, 0)
+    workareacornerhider.ZIndex = 1
 
 
     -- searchbar
@@ -179,6 +198,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     search.BackgroundColor3 = Color3.fromRGB(25, 27, 31)
     search.Position = UDim2.new(0.0256588068, 0, 0.0958904102, 0)
     search.Size = UDim2.new(0, 225, 0, 34)
+    search.ZIndex = 2
 
     local uc_8 = Instance.new("UICorner")
     uc_8.CornerRadius = UDim.new(0, 9)
@@ -193,8 +213,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     searchicon.Position = UDim2.new(0.0379999988, -2, 0.138999999, 2)
     searchicon.Size = UDim2.new(0, 24, 0, 21)
     searchicon.Image = "rbxassetid://2804603863"
-    searchicon.ImageColor3 = Color3.fromRGB(150, 150, 150) -- FIXED: Görünürlük için hafif açıldı
+    searchicon.ImageColor3 = Color3.fromRGB(150, 150, 150)
     searchicon.ScaleType = Enum.ScaleType.Fit
+    searchicon.ZIndex = 2
 
     local searchtextbox = Instance.new("TextBox")
     searchtextbox.Name = "searchtextbox"
@@ -212,6 +233,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     searchtextbox.TextColor3 = Color3.fromRGB(240, 242, 245)
     searchtextbox.TextSize = 22
     searchtextbox.TextXAlignment = Enum.TextXAlignment.Left
+    searchtextbox.ZIndex = 2
 
     searchicon.MouseButton1Click:Connect(function()
         searchtextbox:CaptureFocus()
@@ -231,6 +253,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     sidebar.AutomaticCanvasSize = "Y"
     sidebar.CanvasSize = UDim2.new(0, 0, 0, 0)
     sidebar.ScrollBarThickness = 2
+    sidebar.ZIndex = 2
 
     local ull_2 = Instance.new("UIListLayout")
     ull_2.Parent = sidebar
@@ -264,6 +287,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     buttons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     buttons.BackgroundTransparency = 1
     buttons.Size = UDim2.new(0, 105, 0, 57)
+    buttons.ZIndex = 2
 
     local ull_3 = Instance.new("UIListLayout")
     ull_3.Parent = buttons
@@ -284,6 +308,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     close.Text = ""
     close.TextColor3 = Color3.fromRGB(255, 50, 50)
     close.TextSize = 14
+    close.ZIndex = 2
     close.MouseButton1Click:Connect(function()
         scrgui:Destroy()
     end)
@@ -304,6 +329,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     minimize.Text = ""
     minimize.TextColor3 = Color3.fromRGB(255, 50, 50)
     minimize.TextSize = 14
+    minimize.ZIndex = 2
 
 
     local uc_19 = Instance.new("UICorner")
@@ -321,6 +347,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     resize.Text = ""
     resize.TextColor3 = Color3.fromRGB(255, 50, 50)
     resize.TextSize = 14
+    resize.ZIndex = 2
 
     local uc_20 = Instance.new("UICorner")
     uc_20.CornerRadius = UDim.new(1, 0)
@@ -342,17 +369,18 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     title.TextSize = 28
     title.TextWrapped = true
     title.TextXAlignment = Enum.TextXAlignment.Left
+    title.ZIndex = 2
 
     -- notif1
     local notif = Instance.new("Frame")
     notif.Name = "notif"
     notif.Parent = main
     notif.AnchorPoint = Vector2.new(0.5, 0.5)
-    notif.BackgroundColor3 = Color3.fromRGB(32, 34, 38) -- FIXED: Beyazdan koyu griye çekildi
+    notif.BackgroundColor3 = Color3.fromRGB(32, 34, 38)
     notif.Position = UDim2.new(0.5, 0, 0.5, 0)
     notif.Size = UDim2.new(0, 304, 0, 362)
     notif.Visible = false
-    notif.ZIndex = 3
+    notif.ZIndex = 5
 
     local uc_11 = Instance.new("UICorner")
     uc_11.CornerRadius = UDim.new(0, 18)
@@ -365,7 +393,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notificon.BackgroundTransparency = 1
     notificon.Position = UDim2.new(0.335526317, 0, 0.0994475111, 0)
     notificon.Size = UDim2.new(0, 100, 0, 100)
-    notificon.ZIndex = 3
+    notificon.ZIndex = 5
     notificon.Image = "rbxassetid://4871684504"
     notificon.ImageColor3 = Color3.fromRGB(240, 242, 245)
 
@@ -375,7 +403,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notifbutton1.BackgroundColor3 = Color3.fromRGB(21, 103, 251)
     notifbutton1.Position = UDim2.new(0.0559210554, 0, 0.817679524, 0)
     notifbutton1.Size = UDim2.new(0, 270, 0, 50)
-    notifbutton1.ZIndex = 3
+    notifbutton1.ZIndex = 5
     notifbutton1.Font = Enum.Font.Gotham
     notifbutton1.Text = "OK"
     notifbutton1.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -394,6 +422,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notifshadow.Size = UDim2.new(1.20000005, 0, 1.20000005, 0)
     notifshadow.Image = "rbxassetid://313486536"
     notifshadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    notifshadow.ZIndex = 4
 
     local notifdarkness = Instance.new("Frame")
     notifdarkness.Name = "notifdarkness"
@@ -403,7 +432,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notifdarkness.BackgroundTransparency = 0.600
     notifdarkness.Position = UDim2.new(0.5, 0, 0.5, 0)
     notifdarkness.Size = UDim2.new(0, 721, 0, 584)
-    notifdarkness.ZIndex = 2
+    notifdarkness.ZIndex = 3
 
     local uc_13 = Instance.new("UICorner")
     uc_13.CornerRadius = UDim.new(0, 18)
@@ -416,7 +445,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notiftitle.BackgroundTransparency = 1
     notiftitle.Position = UDim2.new(0.167763159, 0, 0.375690609, 0)
     notiftitle.Size = UDim2.new(0, 200, 0, 50)
-    notiftitle.ZIndex = 3
+    notiftitle.ZIndex = 5
     notiftitle.Font = Enum.Font.GothamMedium
     notiftitle.Text = "Notice"
     notiftitle.TextColor3 = Color3.fromRGB(240, 242, 245)
@@ -429,10 +458,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notiftext.BackgroundTransparency = 1
     notiftext.Position = UDim2.new(0.0822368413, 0, 0.513812184, 0)
     notiftext.Size = UDim2.new(0, 254, 0, 66)
-    notiftext.ZIndex = 3
+    notiftext.ZIndex = 5
     notiftext.Font = Enum.Font.Gotham
     notiftext.Text = "We would like to contact you regarding your car's extended warranty."
-    notiftext.TextColor3 = Color3.fromRGB(180, 185, 195) -- FIXED: Karanlık temaya uygun açık gri metin
+    notiftext.TextColor3 = Color3.fromRGB(180, 185, 195)
     notiftext.TextSize = 16
     notiftext.TextWrapped = true
 
@@ -442,11 +471,11 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2.Name = "notif2"
     notif2.Parent = main
     notif2.AnchorPoint = Vector2.new(0.5, 0.5)
-    notif2.BackgroundColor3 = Color3.fromRGB(32, 34, 38) -- FIXED: Beyazdan koyu griye çekildi
+    notif2.BackgroundColor3 = Color3.fromRGB(32, 34, 38)
     notif2.Position = UDim2.new(0.5, 0, 0.5, 0)
     notif2.Size = UDim2.new(0, 304, 0, 362)
     notif2.Visible = false
-    notif2.ZIndex = 3
+    notif2.ZIndex = 5
 
     local uc_14 = Instance.new("UICorner")
     uc_14.CornerRadius = UDim.new(0, 18)
@@ -459,7 +488,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2icon.BackgroundTransparency = 1
     notif2icon.Position = UDim2.new(0.335526317, 0, 0.0994475111, 0)
     notif2icon.Size = UDim2.new(0, 100, 0, 100)
-    notif2icon.ZIndex = 3
+    notif2icon.ZIndex = 5
     notif2icon.Image = "rbxassetid://12608260095"
     notif2icon.ImageColor3 = Color3.fromRGB(240, 242, 245)
 
@@ -470,7 +499,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2title.BackgroundTransparency = 1
     notif2title.Position = UDim2.new(0.167763159, 0, 0.375690609, 0)
     notif2title.Size = UDim2.new(0, 200, 0, 50)
-    notif2title.ZIndex = 3
+    notif2title.ZIndex = 5
     notif2title.Font = Enum.Font.GothamMedium
     notif2title.Text = "Notice"
     notif2title.TextColor3 = Color3.fromRGB(240, 242, 245)
@@ -484,10 +513,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2text.BackgroundTransparency = 1
     notif2text.Position = UDim2.new(0.0822368413, 0, 0.513812184, 0)
     notif2text.Size = UDim2.new(0, 254, 0, 66)
-    notif2text.ZIndex = 3
+    notif2text.ZIndex = 5
     notif2text.Font = Enum.Font.Gotham
     notif2text.Text = "We would like to contact you regarding your car's extended warranty."
-    notif2text.TextColor3 = Color3.fromRGB(180, 185, 195) -- FIXED: Karanlık temaya uygun açık gri metin
+    notif2text.TextColor3 = Color3.fromRGB(180, 185, 195)
     notif2text.TextSize = 16
     notif2text.TextWrapped = true
 
@@ -498,7 +527,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2button1.BackgroundColor3 = Color3.fromRGB(21, 103, 251)
     notif2button1.Position = UDim2.new(0.0559210517, 0, 0.715469658, 0)
     notif2button1.Size = UDim2.new(0, 270, 0, 40)
-    notif2button1.ZIndex = 3
+    notif2button1.ZIndex = 5
     notif2button1.Font = Enum.Font.Gotham
     notif2button1.Text = "Sure!"
     notif2button1.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -518,6 +547,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2shadow.Size = UDim2.new(1.20000005, 0, 1.20000005, 0)
     notif2shadow.Image = "rbxassetid://313486536"
     notif2shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    notif2shadow.ZIndex = 4
 
 
     local notif2darkness = Instance.new("Frame")
@@ -528,7 +558,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2darkness.BackgroundTransparency = 0.600
     notif2darkness.Position = UDim2.new(0.5, 0, 0.5, 0)
     notif2darkness.Size = UDim2.new(0, 721, 0, 584)
-    notif2darkness.ZIndex = 2
+    notif2darkness.ZIndex = 3
 
 
     local uc_16 = Instance.new("UICorner")
@@ -543,7 +573,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2button2.BackgroundTransparency = 1
     notif2button2.Position = UDim2.new(0.0526315793, 0, 0.842541456, 0)
     notif2button2.Size = UDim2.new(0, 270, 0, 40)
-    notif2button2.ZIndex = 3
+    notif2button2.ZIndex = 5
     notif2button2.Font = Enum.Font.Gotham
     notif2button2.Text = "Go away."
     notif2button2.TextColor3 = Color3.fromRGB(240, 242, 245)
@@ -605,12 +635,12 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         tempnotif.Name = "tempnotif"
         tempnotif.Parent = scrgui
         tempnotif.AnchorPoint = Vector2.new(0.5, 0.5)
-        tempnotif.BackgroundColor3 = Color3.fromRGB(32, 34, 38) -- FIXED: Beyazdan koyu griye çekildi
+        tempnotif.BackgroundColor3 = Color3.fromRGB(32, 34, 38)
         tempnotif.BackgroundTransparency = 0.150
         tempnotif.Position = UDim2.new(1, -250, 0.0794737339, 0)
         tempnotif.Size = UDim2.new(0, 447, 0, 117)
         tempnotif.Visible = true
-        tempnotif.ZIndex = 4
+        tempnotif.ZIndex = 6
 
         local uc_21 = Instance.new("UICorner")
         uc_21.CornerRadius = UDim.new(0, 18)
@@ -623,10 +653,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         t2.BackgroundTransparency = 1
         t2.Position = UDim2.new(0.236927822, 0, 0.470085472, 0)
         t2.Size = UDim2.new(0, 326, 0, 52)
-        t2.ZIndex = 4
+        t2.ZIndex = 6
         t2.Font = Enum.Font.Gotham
         t2.Text = text2
-        t2.TextColor3 = Color3.fromRGB(180, 185, 195) -- FIXED: Açık renk yapıldı
+        t2.TextColor3 = Color3.fromRGB(180, 185, 195)
         t2.TextSize = 16
         t2.TextWrapped = true
         t2.TextXAlignment = Enum.TextXAlignment.Left
@@ -640,7 +670,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         t1.BackgroundTransparency = 1
         t1.Position = UDim2.new(0.234690696, 0, 0.193464488, 0)
         t1.Size = UDim2.new(0, 327, 0, 25)
-        t1.ZIndex = 4
+        t1.ZIndex = 6
         t1.Font = Enum.Font.GothamMedium
         t1.Text = text1
         t1.TextColor3 = Color3.fromRGB(240, 242, 245)
@@ -655,7 +685,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         ticon.BackgroundTransparency = 1
         ticon.Position = UDim2.new(0.0311112702, 0, 0.193464488, 0)
         ticon.Size = UDim2.new(0, 71, 0, 71)
-        ticon.ZIndex = 4
+        ticon.ZIndex = 6
         ticon.Image = icon
         ticon.ImageColor3 = Color3.fromRGB(240, 242, 245)
         ticon.ScaleType = Enum.ScaleType.Fit
@@ -668,7 +698,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         tshadow.BackgroundTransparency = 1
         tshadow.Position = UDim2.new(0.5, 0, 0.5, 0)
         tshadow.Size = UDim2.new(1.12, 0, 1.20000005, 0)
-        tshadow.ZIndex = 3
+        tshadow.ZIndex = 5
         tshadow.Image = "rbxassetid://313486536"
         tshadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
         tshadow.ImageTransparency = 0.400
@@ -727,11 +757,12 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         sidebardivider.Size = UDim2.new(0, 226, 0, 26)
         sidebardivider.Font = Enum.Font.Gotham
         sidebardivider.Text = name
-        sidebardivider.TextColor3 = Color3.fromRGB(150, 155, 165) -- FIXED: Koyu temada göze batmayan soft renk
-        sidebardivider.TextSize = 18 -- FIXED: Estetik durması için biraz küçültüldü
+        sidebardivider.TextColor3 = Color3.fromRGB(150, 155, 165)
+        sidebardivider.TextSize = 18
         sidebardivider.TextWrapped = true
         sidebardivider.TextXAlignment = Enum.TextXAlignment.Left
         sidebardivider.TextYAlignment = Enum.TextYAlignment.Bottom
+        sidebardivider.ZIndex = 2
     end
 
     function window:Section(name)
@@ -745,7 +776,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         sidebar2.AutoButtonColor = false
         sidebar2.Font = Enum.Font.Gotham
         sidebar2.Text = name
-        sidebar2.TextColor3 = Color3.fromRGB(180, 185, 195) -- FIXED: Siyah yerine açık gri yapıldı
+        sidebar2.TextColor3 = Color3.fromRGB(180, 185, 195)
         sidebar2.TextSize = 21
         
         local uc_10 = Instance.new("UICorner")
@@ -779,17 +810,16 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         function sec:Select()
             for b, v in next, sections do
                 v.BackgroundTransparency = 1
-                v.TextColor3 = Color3.fromRGB(180, 185, 195) -- FIXED: Seçili olmayanlar açık gri kalacak
+                v.TextColor3 = Color3.fromRGB(180, 185, 195)
             end
             sidebar2.BackgroundTransparency = 0
-            sidebar2.TextColor3 = Color3.fromRGB(255, 255, 255) -- Seçili olan saf beyaz
+            sidebar2.TextColor3 = Color3.fromRGB(255, 255, 255)
             for b, v in next, workareas do
                 v.Visible = false
             end
             workareamain.Visible = true
         end
         
-        -- Butona tıklama eventi (seçim tetiklenmesi için)
         sidebar2.MouseButton1Click:Connect(function()
             sec:Select()
         end)
@@ -805,11 +835,12 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             section.Font = Enum.Font.Gotham
             section.LineHeight = 1.180
             section.Text = name
-            section.TextColor3 = Color3.fromRGB(240, 242, 245) -- FIXED: Siyah yerine açık renk yapıldı
+            section.TextColor3 = Color3.fromRGB(240, 242, 245)
             section.TextSize = 25
             section.TextWrapped = true
             section.TextXAlignment = Enum.TextXAlignment.Left
             section.TextYAlignment = Enum.TextYAlignment.Bottom
+            section.ZIndex = 3
         end
         
         function sec:Button(name, callback)
@@ -817,10 +848,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             button.Name = "button"
             button.Text = name
             button.Parent = workareamain
-            button.BackgroundColor3 = Color3.fromRGB(32, 34, 38) -- FIXED: Arka plan koyu yapıldı
-            button.BackgroundTransparency = 0.5 -- FIXED: Tam şeffaf yerine hafif belirgin durması sağlandı
+            button.BackgroundColor3 = Color3.fromRGB(32, 34, 38)
+            button.BackgroundTransparency = 0.3 -- Arka plan resmini hafif gösterecek kadar opaklık düşürüldü
             button.Size = UDim2.new(0, 418, 0, 37)
-            button.ZIndex = 2
+            button.ZIndex = 4
             button.Font = Enum.Font.Gotham
             button.TextColor3 = Color3.fromRGB(21, 103, 251)
             button.TextSize = 21
@@ -860,6 +891,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             label.TextSize = 21
             label.TextWrapped = true
             label.Text = name
+            label.ZIndex = 3
         end
 
         function sec:Switch(name, defaultmode, callback)
@@ -872,12 +904,12 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             toggleswitch.BorderSizePixel = 2
             toggleswitch.Size = UDim2.new(0, 418, 0, 37)
             toggleswitch.Font = Enum.Font.Gotham
-            toggleswitch.Text = "  " .. name -- Sol tarafta boşluk bırakıldı
+            toggleswitch.Text = "  " .. name
             toggleswitch.TextColor3 = Color3.fromRGB(240, 242, 245)
             toggleswitch.TextSize = 21
             toggleswitch.TextXAlignment = Enum.TextXAlignment.Left
+            toggleswitch.ZIndex = 3
 
-            -- Switch için sağ tarafa buton ekleme (Eksik Kısım Tamamlandı)
             local switchbtn = Instance.new("TextButton")
             switchbtn.Name = "switchbtn"
             switchbtn.Parent = toggleswitch
@@ -886,6 +918,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             switchbtn.Font = Enum.Font.GothamBold
             switchbtn.TextSize = 14
             switchbtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+            switchbtn.ZIndex = 4
             
             local uc_switch = Instance.new("UICorner")
             uc_switch.CornerRadius = UDim.new(0, 6)
